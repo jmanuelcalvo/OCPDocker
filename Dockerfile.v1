@@ -1,0 +1,14 @@
+FROM centos:7
+
+MAINTAINER Jose Manuel Calvo <jcalvo@redhat.com>
+
+LABEL description="A basic Apache container on RHEL 7"
+
+RUN yum -y install -y httpd && \
+yum clean all &&  \
+echo "Hola contenedor editado desde Dockerfile!" > /var/www/html/index.html
+
+EXPOSE 80
+
+CMD  ["httpd", "-D", "FOREGROUND"]
+

@@ -1,0 +1,20 @@
+FROM centos:7
+
+MAINTAINER Jose Manuel Calvo <jcalvo@redhat.com>
+
+LABEL io.k8s.description="Descripcion Imagen de servidor Apache" \
+      io.k8s.display-name="Imagen de servidor Apache" \
+      io.openshift.expose-services="8080:http" \
+      io.openshift.s2i.scripts-url="image:///usr/libexec/s2i" \
+      io.openshift.tags="builder,webserver,apache,http"
+
+RUN yum -y install -y httpd && \
+    yum clean all &&  \
+    echo "Hola contenedor editado desde Dockerfile!" > /var/www/html/index2.html
+ADD files/index.html /var/www/html/index.html
+
+EXPOSE 8080
+USER 1001
+
+CMD  ["httpd", "-D", "FOREGROUND"]
+
