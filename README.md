@@ -13,12 +13,15 @@ Teniendo en cuenta que OpenShift permite ejecutar dichos contenedores los pasos 
 EXPOSE 8080
 
 CMD  ["httpd", "-D", "FOREGROUND"]
+
+o 
+
 CMD bash -c "while true; do echo test; sleep 5; done"
 ```
 
 3. Relizar las pruebas de ejeucion en su docker local
 ```
-sudo docker run -d -p 8080:8080 --name=apache01 jmanuelcalvo/apache
+[root@bastion ~]# sudo docker run -d -p 8080:8080 --name=apache01 jmanuelcalvo/apache
 [root@bastion ~]# docker ps
 CONTAINER ID        IMAGE                 COMMAND                 CREATED             STATUS              PORTS                            NAMES
 72a4774ef0e9        jmanuelcalvo/apache   "httpd -D FOREGROUND"   21 seconds ago      Up 20 seconds       80/tcp, 0.0.0.0:8080->8080/tcp   apache01
